@@ -5,8 +5,7 @@ type player =
 type point =
   | Love
   | Fifteen
-  | Thirty
-  | Forty;
+  | Thirty;
 
 type pointsData = {
   playerOne: point,
@@ -30,6 +29,8 @@ let scoreWhenDeuce: player => score = winner => Advantage(winner);
 let scoreWhenAdvantage: (player, player) => score =
   (advantagedPlayer, winner) => advantagedPlayer == winner ? Game(winner) : Deuce;
 
+let scoreWhenGame = winner => Game(winner);
+
   /* This time we infer that the function type is (player) => player */
 let other = player =>
   switch player {
@@ -49,13 +50,13 @@ let incrementPoint: point => option(point) =
 
 let scoreWhenForty = (current, winner) =>
   current.player == winner ?
-    Game(winner) :(
+    Game(winner) :
+    (
       switch (incrementPoint(current.otherPlayerPoint)) {
       | Some(p) => Forty({...current, otherPlayerPoint: p})
       | None => Deuce
       }
-    )
-;
+    );
 
 let pointTo = (player, point, current) =>
   switch player {
@@ -78,3 +79,15 @@ let scoreWhenPoints = (current, winner) =>
       otherPlayerPoint: current |> pointFor(other(winner))
     })
   };
+
+let score = (current, winner) =>
+  switch current {
+  | Points(p) => scoreWhenPoints(p, winner)
+  | Forty(f) => scoreWhenForty(f, winner)
+  | Deuce => scoreWhenDeuce(winner)
+  | Advantage(a) => scoreWhenAdvantage(a, winner)
+  | Game(g) => scoreWhenGame(g)
+  }
+;
+
+let newGame = Points({playerOne: Love, playerTwo: Love});
