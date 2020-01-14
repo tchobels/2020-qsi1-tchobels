@@ -108,46 +108,51 @@ describe("Test string_of_score for Points : playerOne 0|15|30-0|15|30 playerTwo"
     let thirtyFifteen = {playerOne: Thirty, playerTwo: Fifteen};
     let thirtyThirty = {playerOne: Thirty, playerTwo: Thirty};
 
-    expect.equal(string_of_point(Points(loveFifteen)),"PlayerOne 0-15 PlayerTwo",);
-    expect.equal(string_of_point(Points(loveThirty)),"PlayerOne 0-30 PlayerTwo",);
-    expect.equal(string_of_point(Points(fifteenLove)),"PlayerOne 15-0 PlayerTwo",);
-    expect.equal(string_of_point(Points(fifteenFifteen)),"PlayerOne 15-15 PlayerTwo",);
-    expect.equal(string_of_point(Points(fifteenThirty)),"PlayerOne 15-30 PlayerTwo",);
-    expect.equal(string_of_point(Points(thirtyLove)),"PlayerOne 30-0 PlayerTwo",);
-    expect.equal(string_of_point(Points(thirtyFifteen)),"PlayerOne 30-15 PlayerTwo",);
-    expect.equal(string_of_point(Points(thirtyThirty)),"PlayerOne 30-30 PlayerTwo",);
+    expect.equal(string_of_score(Points(loveFifteen)),"Player 1 0-15 Player 2",);
+    expect.equal(string_of_score(Points(loveThirty)),"Player 1 0-30 Player 2",);
+    expect.equal(string_of_score(Points(fifteenLove)),"Player 1 15-0 Player 2",);
+    expect.equal(string_of_score(Points(fifteenFifteen)),"Player 1 15-15 Player 2",);
+    expect.equal(string_of_score(Points(fifteenThirty)),"Player 1 15-30 Player 2",);
+    expect.equal(string_of_score(Points(thirtyLove)),"Player 1 30-0 Player 2",);
+    expect.equal(string_of_score(Points(thirtyFifteen)),"Player 1 30-15 Player 2",);
+    expect.equal(string_of_score(Points(thirtyThirty)),"Player 1 30-30 Player 2",);
   });
 });
+
 
 describe("Test string_of_score for Forty : PlayerOne 40-|0|15|30 PlayerTwo : Set point / PlayerTwo 40-|0|15|30 PlayerOne : Set point", ({test}) => {
   test("Test string_of_score for Forty",({expect}) => {
     let fortyLove = {player: PlayerOne, otherPlayerPoint: Love};
-    let loveForty = {player: Love, otherPlayerPoint: PlayerTwo};
-    expect.equal(string_of_point(Forty(fortyLove)),"PlayerOne 40-0 PlayerTwo : Set point",);
-    expect.equal(string_of_point(Forty(loveForty)),"PlayerOne 0-40 PlayerTwo : Set point",);
+    let loveForty = {player: PlayerTwo, otherPlayerPoint: Love};
+    expect.equal(string_of_score(Forty(fortyLove)),"Player 1 40-0 Player 2 : Set point",);
+    expect.equal(string_of_score(Forty(loveForty)),"Player 2 40-0 Player 1 : Set point",);
   });
 });
+
 
 describe("Test string_of_score for Deuce : PlayerOne 40-40 PlayerTwo : Deuce", ({test}) => {
   test("Test string_of_score for Deuce : PlayerOne 40-40 PlayerTwo : Deuce",({expect}) => {
-   expect.equal(string_of_point(Deuce),"PlayerOne 40-40 PlayerTwo : Deuce",);
+   expect.equal(string_of_score(Deuce),"Player 1 40-40 Player 2 : Deuce",);
   });
 });
 
-describe("Test string_of_score for Advantage : Advantage: PlayerOne / Advantage: PlayerTwo", ({test}) => {
-  test("Test string_of_score for Advantage : Advantage: PlayerOne / Advantage: PlayerTwo",({expect}) => {
+
+describe("Test string_of_score for Advantage : Advantage: Player 1 / Advantage: Player 2", ({test}) => {
+  test("Test string_of_score for Advantage : Advantage: Player 1 / Advantage: Player 2",({expect}) => {
     let player = PlayerOne;
     let player2 = PlayerTwo;
-    expect.equal(string_of_score(Advantage(player)),"Advantage: PlayerOne",);
-    expect.equal(string_of_score(Advantage(player2)),"Advantage: PlayerTwo",);
+    expect.equal(string_of_score(Advantage(player)),"Advantage: Player 1",);
+    expect.equal(string_of_score(Advantage(player2)),"Advantage: Player 2",);
   });
 });
 
-describe("Test string_of_score for Game : PlayerOne wins/ PlayerTwo wins", ({test}) => {
-  test("Test string_of_score for Game : PlayerOne wins/ PlayerTwo wins",({expect}) => {
+
+describe("Test string_of_score for Game : Player 1 wins/ Player 2  wins", ({test}) => {
+  test("Test string_of_score for Game : Player 1 wins/ Player 2 wins",({expect}) => {
     let player = PlayerOne;
     let player2 = PlayerTwo;
-    expect.equal(string_of_score(Game(player)),"PlayerOne wins",);
-    expect.equal(string_of_score(Game(player2)),"PlayerTwo wins",);
+    expect.equal(string_of_score(Game(player)),"Player 1 wins",);
+    expect.equal(string_of_score(Game(player2)),"Player 2 wins",);
   });
 });
+
