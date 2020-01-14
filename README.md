@@ -1,4 +1,6 @@
-# TENNIS KATA
+# J'ai clone le projet au lieu de fork. J'ai donc fork à la fin du projet et fait un last commit pour écrire cette ligne.
+
+# RENDU TENNIS KATA
 
 ## Goals of this training
 
