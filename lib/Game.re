@@ -56,19 +56,22 @@ let scoreWhenForty = (current, winner) =>
       | Some(p) => Forty({...current, otherPlayerPoint: p})
       | None => Deuce
       }
-    );
+    )
+;
 
 let pointTo = (player, point, current) =>
   switch player {
   | PlayerOne => {...current, playerOne: point}
   | PlayerTwo => {...current, playerTwo: point}
-  };
+  }
+;
 
 let pointFor = (player, current) =>
   switch player {
   | PlayerOne => current.playerOne
   | PlayerTwo => current.playerTwo
-  };
+  }
+;
 
 let scoreWhenPoints = (current, winner) =>
   switch (current |> pointFor(winner) |> incrementPoint) {
@@ -78,7 +81,8 @@ let scoreWhenPoints = (current, winner) =>
       player: winner,
       otherPlayerPoint: current |> pointFor(other(winner))
     })
-  };
+  }
+;
 
 let score = (current, winner) =>
   switch current {
@@ -91,3 +95,24 @@ let score = (current, winner) =>
 ;
 
 let newGame = Points({playerOne: Love, playerTwo: Love});
+
+let string_of_player: (player) => string = player =>
+  switch player {
+  | PlayerOne => "Player 1 "
+  | PlayerTwo => "Player 2 "
+  }
+;
+
+let string_of_point = (point) => string = point =>
+  switch point {
+  | Love => "0"
+  | Fifteen => "15"
+  | Thirty => "30"
+  }
+;
+
+let string_of_score = (score) => string = score =>
+  switch score {
+  //TODO
+  }
+;
