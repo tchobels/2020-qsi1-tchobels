@@ -96,14 +96,14 @@ let score = (current, winner) =>
 
 let newGame = Points({playerOne: Love, playerTwo: Love});
 
-let string_of_player: (player) => string = player =>
+let string_of_player: (player) =>
   switch player {
-  | PlayerOne => "Player 1 "
-  | PlayerTwo => "Player 2 "
+  | PlayerOne => "Player 1"
+  | PlayerTwo => "Player 2"
   }
 ;
 
-let string_of_point = (point) => string = point =>
+let string_of_point = (point) =>
   switch point {
   | Love => "0"
   | Fifteen => "15"
@@ -111,8 +111,12 @@ let string_of_point = (point) => string = point =>
   }
 ;
 
-let string_of_score = (score) => string = score =>
+let string_of_score = (score) =>
   switch score {
-  //TODO
+  | Points(pointsData) => string_of_player(PlayerOne) ++ " " ++ string_of_point(pointsData.playerOne) ++ "-" ++ string_of_point(pointsData.playerTwo) ++ " " ++ string_of_player(PlayerTwo)
+  | Forty(fortyData) => string_of_player(fortyData.player) ++ " 40-" ++ string_of_point(fortyData.otherPlayerPoint) ++ " " ++ string_of_player(other(fortyData.player)) ++ ": Set point"
+  | Deuce => string_of_player(PlayerOne) ++ " 40-40 " ++ string_of_player(PlayerTwo) ++ " : Deuce"
+  | Advantage(player) => "Advantage: " ++ string_of_player(player)
+  | Game(player) => string_of_player(player) ++ " : wins"
   }
 ;
